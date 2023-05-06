@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ObligatorioModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="EMPLEADO">
+    <Key>
+      <PropertyRef Name="Usuario" />
+    </Key>
+    <Property Name="Usuario" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Contrasenia" Type="varchar" MaxLength="7" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ESCRITAPOR">
+    <Key>
+      <PropertyRef Name="CodigoNoticia" />
+      <PropertyRef Name="Cedula" />
+    </Key>
+    <Property Name="CodigoNoticia" Type="varchar" MaxLength="4" Nullable="false" />
+    <Property Name="Cedula" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="NOTICIA">
+    <Key>
+      <PropertyRef Name="CodigoNoticia" />
+    </Key>
+    <Property Name="CodigoNoticia" Type="varchar" MaxLength="4" Nullable="false" />
+    <Property Name="Fecha" Type="datetime" Nullable="false" />
+    <Property Name="Titulo" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Cuerpo" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="Importancia" Type="int" Nullable="false" />
+    <Property Name="CodigoSeccion" Type="varchar" MaxLength="5" Nullable="false" />
+    <Property Name="Usuario" Type="varchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PERIODISTA">
+    <Key>
+      <PropertyRef Name="Cedula" />
+    </Key>
+    <Property Name="Cedula" Type="int" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Mail" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SECCION">
+    <Key>
+      <PropertyRef Name="CodigoSeccion" />
+    </Key>
+    <Property Name="CodigoSeccion" Type="varchar" MaxLength="5" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="15" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__ESCRITAPO__Cedul__3A81B327">
+    <End Role="PERIODISTA" Type="Self.PERIODISTA" Multiplicity="1" />
+    <End Role="ESCRITAPOR" Type="Self.ESCRITAPOR" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PERIODISTA">
+        <PropertyRef Name="Cedula" />
+      </Principal>
+      <Dependent Role="ESCRITAPOR">
+        <PropertyRef Name="Cedula" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ESCRITAPO__Codig__398D8EEE">
+    <End Role="NOTICIA" Type="Self.NOTICIA" Multiplicity="1" />
+    <End Role="ESCRITAPOR" Type="Self.ESCRITAPOR" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NOTICIA">
+        <PropertyRef Name="CodigoNoticia" />
+      </Principal>
+      <Dependent Role="ESCRITAPOR">
+        <PropertyRef Name="CodigoNoticia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__NOTICIA__CodigoS__35BCFE0A">
+    <End Role="SECCION" Type="Self.SECCION" Multiplicity="1" />
+    <End Role="NOTICIA" Type="Self.NOTICIA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SECCION">
+        <PropertyRef Name="CodigoSeccion" />
+      </Principal>
+      <Dependent Role="NOTICIA">
+        <PropertyRef Name="CodigoSeccion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__NOTICIA__Usuario__36B12243">
+    <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="1" />
+    <End Role="NOTICIA" Type="Self.NOTICIA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EMPLEADO">
+        <PropertyRef Name="Usuario" />
+      </Principal>
+      <Dependent Role="NOTICIA">
+        <PropertyRef Name="Usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="AltaEmpleado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="user" Type="varchar" Mode="In" />
+    <Parameter Name="pass" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="AltaPeriodista" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ced" Type="int" Mode="In" />
+    <Parameter Name="nom" Type="varchar" Mode="In" />
+    <Parameter Name="mail" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="AltaSeccion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="code" Type="varchar" Mode="In" />
+    <Parameter Name="nombre" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="EditoPeriodista" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ced" Type="int" Mode="In" />
+    <Parameter Name="nom" Type="varchar" Mode="In" />
+    <Parameter Name="mail" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="EliminoPeriodista" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ced" Type="int" Mode="In" />
+    <Parameter Name="ret" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="EliminoSeccion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="code" Type="varchar" Mode="In" />
+    <Parameter Name="ret" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="ModificoSeccion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="code" Type="varchar" Mode="In" />
+    <Parameter Name="nombre" Type="varchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="ObligatorioModelStoreContainer">
+    <EntitySet Name="EMPLEADO" EntityType="Self.EMPLEADO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ESCRITAPOR" EntityType="Self.ESCRITAPOR" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NOTICIA" EntityType="Self.NOTICIA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PERIODISTA" EntityType="Self.PERIODISTA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SECCION" EntityType="Self.SECCION" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__ESCRITAPO__Cedul__3A81B327" Association="Self.FK__ESCRITAPO__Cedul__3A81B327">
+      <End Role="PERIODISTA" EntitySet="PERIODISTA" />
+      <End Role="ESCRITAPOR" EntitySet="ESCRITAPOR" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ESCRITAPO__Codig__398D8EEE" Association="Self.FK__ESCRITAPO__Codig__398D8EEE">
+      <End Role="NOTICIA" EntitySet="NOTICIA" />
+      <End Role="ESCRITAPOR" EntitySet="ESCRITAPOR" />
+    </AssociationSet>
+    <AssociationSet Name="FK__NOTICIA__CodigoS__35BCFE0A" Association="Self.FK__NOTICIA__CodigoS__35BCFE0A">
+      <End Role="SECCION" EntitySet="SECCION" />
+      <End Role="NOTICIA" EntitySet="NOTICIA" />
+    </AssociationSet>
+    <AssociationSet Name="FK__NOTICIA__Usuario__36B12243" Association="Self.FK__NOTICIA__Usuario__36B12243">
+      <End Role="EMPLEADO" EntitySet="EMPLEADO" />
+      <End Role="NOTICIA" EntitySet="NOTICIA" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

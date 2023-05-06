@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ObligatorioModelStoreContainer" CdmEntityContainer="ObligatorioEntities">
+    <EntitySetMapping Name="EMPLEADO">
+      <EntityTypeMapping TypeName="ObligatorioModel.EMPLEADO">
+        <MappingFragment StoreEntitySet="EMPLEADO">
+          <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+          <ScalarProperty Name="Contrasenia" ColumnName="Contrasenia" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="ObligatorioModel.EMPLEADO">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="ObligatorioModel.Store.AltaEmpleado">
+            <ScalarProperty Name="Contrasenia" ParameterName="pass" />
+            <ScalarProperty Name="Usuario" ParameterName="user" />
+          </InsertFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NOTICIA">
+      <EntityTypeMapping TypeName="ObligatorioModel.NOTICIA">
+        <MappingFragment StoreEntitySet="NOTICIA">
+          <ScalarProperty Name="CodigoNoticia" ColumnName="CodigoNoticia" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+          <ScalarProperty Name="Cuerpo" ColumnName="Cuerpo" />
+          <ScalarProperty Name="Importancia" ColumnName="Importancia" />
+          <ScalarProperty Name="CodigoSeccion" ColumnName="CodigoSeccion" />
+          <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PERIODISTA">
+      <EntityTypeMapping TypeName="ObligatorioModel.PERIODISTA">
+        <MappingFragment StoreEntitySet="PERIODISTA">
+          <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Mail" ColumnName="Mail" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="ObligatorioModel.PERIODISTA">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="ObligatorioModel.Store.AltaPeriodista">
+            <ScalarProperty Name="Mail" ParameterName="mail" />
+            <ScalarProperty Name="Nombre" ParameterName="nom" />
+            <ScalarProperty Name="Cedula" ParameterName="ced" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="ObligatorioModel.Store.EditoPeriodista">
+            <ScalarProperty Name="Mail" ParameterName="mail" Version="Current" />
+            <ScalarProperty Name="Nombre" ParameterName="nom" Version="Current" />
+            <ScalarProperty Name="Cedula" ParameterName="ced" Version="Current" />
+          </UpdateFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SECCION">
+      <EntityTypeMapping TypeName="ObligatorioModel.SECCION">
+        <MappingFragment StoreEntitySet="SECCION">
+          <ScalarProperty Name="CodigoSeccion" ColumnName="CodigoSeccion" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="ObligatorioModel.SECCION">
+        <ModificationFunctionMapping>
+          <UpdateFunction FunctionName="ObligatorioModel.Store.ModificoSeccion">
+            <ScalarProperty Name="Nombre" ParameterName="nombre" Version="Current" />
+            <ScalarProperty Name="CodigoSeccion" ParameterName="code" Version="Current" />
+          </UpdateFunction>
+          <InsertFunction FunctionName="ObligatorioModel.Store.AltaSeccion">
+            <ScalarProperty Name="Nombre" ParameterName="nombre" />
+            <ScalarProperty Name="CodigoSeccion" ParameterName="code" />
+          </InsertFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="ESCRITAPOR" TypeName="ObligatorioModel.ESCRITAPOR" StoreEntitySet="ESCRITAPOR">
+      <EndProperty Name="PERIODISTA">
+        <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+      </EndProperty>
+      <EndProperty Name="NOTICIA">
+        <ScalarProperty Name="CodigoNoticia" ColumnName="CodigoNoticia" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

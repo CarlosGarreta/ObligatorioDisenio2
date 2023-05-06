@@ -1,0 +1,30 @@
+C:\Users\carlo\OneDrive\Escritorio\BIOS 2021\Diseño2\Obligatorio\Obligatorio\Modelo\bin\Debug\Modelo.dll.config
+C:\Users\carlo\OneDrive\Escritorio\BIOS 2021\Diseño2\Obligatorio\Obligatorio\Modelo\bin\Debug\Modelo.dll
+C:\Users\carlo\OneDrive\Escritorio\BIOS 2021\Diseño2\Obligatorio\Obligatorio\Modelo\bin\Debug\Modelo.pdb
+C:\Users\carlo\OneDrive\Escritorio\BIOS 2021\Diseño2\Obligatorio\Obligatorio\Modelo\bin\Debug\EntityFramework.dll
+C:\Users\carlo\OneDrive\Escritorio\BIOS 2021\Diseño2\Obligatorio\Obligatorio\Modelo\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\carlo\OneDrive\Escritorio\BIOS 2021\Diseño2\Obligatorio\Obligatorio\Modelo\bin\Debug\EntityFramework.xml
+C:\Users\carlo\OneDrive\Escritorio\BIOS 2021\Diseño2\Obligatorio\Obligatorio\Modelo\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\carlo\OneDrive\Escritorio\BIOS 2021\Diseño2\Obligatorio\Obligatorio\Modelo\obj\Debug\Modelo.dll
+C:\Users\carlo\OneDrive\Escritorio\BIOS 2021\Diseño2\Obligatorio\Obligatorio\Modelo\obj\Debug\Modelo.pdb
+C:\Users\carlo\OneDrive\Escritorio\BIOS 2021\Diseño2\Obligatorio\Obligatorio\Modelo\obj\Debug\Modelo.csprojResolveAssemblyReference.cache
+C:\Users\Administrador\Desktop\Obligatorio\Obligatorio\Modelo\bin\Debug\Modelo.dll.config
+C:\Users\Administrador\Desktop\Obligatorio\Obligatorio\Modelo\bin\Debug\Modelo.dll
+C:\Users\Administrador\Desktop\Obligatorio\Obligatorio\Modelo\bin\Debug\Modelo.pdb
+C:\Users\Administrador\Desktop\Obligatorio\Obligatorio\Modelo\bin\Debug\EntityFramework.dll
+C:\Users\Administrador\Desktop\Obligatorio\Obligatorio\Modelo\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Administrador\Desktop\Obligatorio\Obligatorio\Modelo\bin\Debug\EntityFramework.xml
+C:\Users\Administrador\Desktop\Obligatorio\Obligatorio\Modelo\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Administrador\Desktop\Obligatorio\Obligatorio\Modelo\obj\Debug\Modelo.csprojResolveAssemblyReference.cache
+C:\Users\Administrador\Desktop\Obligatorio\Obligatorio\Modelo\obj\Debug\Modelo.dll
+C:\Users\Administrador\Desktop\Obligatorio\Obligatorio\Modelo\obj\Debug\Modelo.pdb
+C:\Users\carlo\OneDrive\Escritorio\BIOS 2021\Diseño2\Obligatorio (1)\Obligatorio\Modelo\bin\Debug\Modelo.dll.config
+C:\Users\carlo\OneDrive\Escritorio\BIOS 2021\Diseño2\Obligatorio (1)\Obligatorio\Modelo\bin\Debug\Modelo.dll
+C:\Users\carlo\OneDrive\Escritorio\BIOS 2021\Diseño2\Obligatorio (1)\Obligatorio\Modelo\bin\Debug\Modelo.pdb
+C:\Users\carlo\OneDrive\Escritorio\BIOS 2021\Diseño2\Obligatorio (1)\Obligatorio\Modelo\bin\Debug\EntityFramework.dll
+C:\Users\carlo\OneDrive\Escritorio\BIOS 2021\Diseño2\Obligatorio (1)\Obligatorio\Modelo\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\carlo\OneDrive\Escritorio\BIOS 2021\Diseño2\Obligatorio (1)\Obligatorio\Modelo\bin\Debug\EntityFramework.xml
+C:\Users\carlo\OneDrive\Escritorio\BIOS 2021\Diseño2\Obligatorio (1)\Obligatorio\Modelo\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\carlo\OneDrive\Escritorio\BIOS 2021\Diseño2\Obligatorio (1)\Obligatorio\Modelo\obj\Debug\Modelo.dll
+C:\Users\carlo\OneDrive\Escritorio\BIOS 2021\Diseño2\Obligatorio (1)\Obligatorio\Modelo\obj\Debug\Modelo.pdb
+C:\Users\carlo\OneDrive\Escritorio\BIOS 2021\Diseño2\Obligatorio (1)\Obligatorio\Modelo\obj\Debug\Modelo.csprojResolveAssemblyReference.cache

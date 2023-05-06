@@ -1,0 +1,358 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ObligatorioModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="EMPLEADO">
+          <Key>
+            <PropertyRef Name="Usuario" />
+          </Key>
+          <Property Name="Usuario" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Contrasenia" Type="varchar" MaxLength="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ESCRITAPOR">
+          <Key>
+            <PropertyRef Name="CodigoNoticia" />
+            <PropertyRef Name="Cedula" />
+          </Key>
+          <Property Name="CodigoNoticia" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="Cedula" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NOTICIA">
+          <Key>
+            <PropertyRef Name="CodigoNoticia" />
+          </Key>
+          <Property Name="CodigoNoticia" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="Titulo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Cuerpo" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Importancia" Type="int" Nullable="false" />
+          <Property Name="CodigoSeccion" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="Usuario" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PERIODISTA">
+          <Key>
+            <PropertyRef Name="Cedula" />
+          </Key>
+          <Property Name="Cedula" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Mail" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SECCION">
+          <Key>
+            <PropertyRef Name="CodigoSeccion" />
+          </Key>
+          <Property Name="CodigoSeccion" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__ESCRITAPO__Cedul__3A81B327">
+          <End Role="PERIODISTA" Type="Self.PERIODISTA" Multiplicity="1" />
+          <End Role="ESCRITAPOR" Type="Self.ESCRITAPOR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERIODISTA">
+              <PropertyRef Name="Cedula" />
+            </Principal>
+            <Dependent Role="ESCRITAPOR">
+              <PropertyRef Name="Cedula" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ESCRITAPO__Codig__398D8EEE">
+          <End Role="NOTICIA" Type="Self.NOTICIA" Multiplicity="1" />
+          <End Role="ESCRITAPOR" Type="Self.ESCRITAPOR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NOTICIA">
+              <PropertyRef Name="CodigoNoticia" />
+            </Principal>
+            <Dependent Role="ESCRITAPOR">
+              <PropertyRef Name="CodigoNoticia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NOTICIA__CodigoS__35BCFE0A">
+          <End Role="SECCION" Type="Self.SECCION" Multiplicity="1" />
+          <End Role="NOTICIA" Type="Self.NOTICIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SECCION">
+              <PropertyRef Name="CodigoSeccion" />
+            </Principal>
+            <Dependent Role="NOTICIA">
+              <PropertyRef Name="CodigoSeccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NOTICIA__Usuario__36B12243">
+          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="1" />
+          <End Role="NOTICIA" Type="Self.NOTICIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLEADO">
+              <PropertyRef Name="Usuario" />
+            </Principal>
+            <Dependent Role="NOTICIA">
+              <PropertyRef Name="Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="AltaEmpleado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="user" Type="varchar" Mode="In" />
+          <Parameter Name="pass" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="AltaPeriodista" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ced" Type="int" Mode="In" />
+          <Parameter Name="nom" Type="varchar" Mode="In" />
+          <Parameter Name="mail" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="AltaSeccion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="code" Type="varchar" Mode="In" />
+          <Parameter Name="nombre" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="EditoPeriodista" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ced" Type="int" Mode="In" />
+          <Parameter Name="nom" Type="varchar" Mode="In" />
+          <Parameter Name="mail" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="EliminoPeriodista" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ced" Type="int" Mode="In" />
+          <Parameter Name="ret" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="EliminoSeccion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="code" Type="varchar" Mode="In" />
+          <Parameter Name="ret" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="ModificoSeccion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="code" Type="varchar" Mode="In" />
+          <Parameter Name="nombre" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="ObligatorioModelStoreContainer">
+          <EntitySet Name="EMPLEADO" EntityType="Self.EMPLEADO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ESCRITAPOR" EntityType="Self.ESCRITAPOR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NOTICIA" EntityType="Self.NOTICIA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PERIODISTA" EntityType="Self.PERIODISTA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SECCION" EntityType="Self.SECCION" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__ESCRITAPO__Cedul__3A81B327" Association="Self.FK__ESCRITAPO__Cedul__3A81B327">
+            <End Role="PERIODISTA" EntitySet="PERIODISTA" />
+            <End Role="ESCRITAPOR" EntitySet="ESCRITAPOR" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ESCRITAPO__Codig__398D8EEE" Association="Self.FK__ESCRITAPO__Codig__398D8EEE">
+            <End Role="NOTICIA" EntitySet="NOTICIA" />
+            <End Role="ESCRITAPOR" EntitySet="ESCRITAPOR" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NOTICIA__CodigoS__35BCFE0A" Association="Self.FK__NOTICIA__CodigoS__35BCFE0A">
+            <End Role="SECCION" EntitySet="SECCION" />
+            <End Role="NOTICIA" EntitySet="NOTICIA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NOTICIA__Usuario__36B12243" Association="Self.FK__NOTICIA__Usuario__36B12243">
+            <End Role="EMPLEADO" EntitySet="EMPLEADO" />
+            <End Role="NOTICIA" EntitySet="NOTICIA" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ObligatorioModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="EMPLEADO">
+          <Key>
+            <PropertyRef Name="Usuario" />
+          </Key>
+          <Property Name="Usuario" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Contrasenia" Type="String" MaxLength="7" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NOTICIA">
+          <Key>
+            <PropertyRef Name="CodigoNoticia" />
+          </Key>
+          <Property Name="CodigoNoticia" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Titulo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cuerpo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Importancia" Type="Int32" Nullable="false" />
+          <Property Name="CodigoSeccion" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Usuario" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="EMPLEADO" Relationship="Self.FK__NOTICIA__Usuario__36B12243" FromRole="NOTICIA" ToRole="EMPLEADO" />
+          <NavigationProperty Name="SECCION" Relationship="Self.FK__NOTICIA__CodigoS__35BCFE0A" FromRole="NOTICIA" ToRole="SECCION" />
+          <NavigationProperty Name="PERIODISTA" Relationship="Self.ESCRITAPOR" FromRole="NOTICIA" ToRole="PERIODISTA" />
+        </EntityType>
+        <EntityType Name="PERIODISTA">
+          <Key>
+            <PropertyRef Name="Cedula" />
+          </Key>
+          <Property Name="Cedula" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SECCION">
+          <Key>
+            <PropertyRef Name="CodigoSeccion" />
+          </Key>
+          <Property Name="CodigoSeccion" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__NOTICIA__Usuario__36B12243">
+          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="1" />
+          <End Role="NOTICIA" Type="Self.NOTICIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLEADO">
+              <PropertyRef Name="Usuario" />
+            </Principal>
+            <Dependent Role="NOTICIA">
+              <PropertyRef Name="Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NOTICIA__CodigoS__35BCFE0A">
+          <End Role="SECCION" Type="Self.SECCION" Multiplicity="1" />
+          <End Role="NOTICIA" Type="Self.NOTICIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SECCION">
+              <PropertyRef Name="CodigoSeccion" />
+            </Principal>
+            <Dependent Role="NOTICIA">
+              <PropertyRef Name="CodigoSeccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ESCRITAPOR">
+          <End Role="PERIODISTA" Type="Self.PERIODISTA" Multiplicity="*" />
+          <End Role="NOTICIA" Type="Self.NOTICIA" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="ObligatorioEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="EMPLEADO" EntityType="Self.EMPLEADO" />
+          <EntitySet Name="NOTICIA" EntityType="Self.NOTICIA" />
+          <EntitySet Name="PERIODISTA" EntityType="Self.PERIODISTA" />
+          <EntitySet Name="SECCION" EntityType="Self.SECCION" />
+          <AssociationSet Name="FK__NOTICIA__Usuario__36B12243" Association="Self.FK__NOTICIA__Usuario__36B12243">
+            <End Role="EMPLEADO" EntitySet="EMPLEADO" />
+            <End Role="NOTICIA" EntitySet="NOTICIA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NOTICIA__CodigoS__35BCFE0A" Association="Self.FK__NOTICIA__CodigoS__35BCFE0A">
+            <End Role="SECCION" EntitySet="SECCION" />
+            <End Role="NOTICIA" EntitySet="NOTICIA" />
+          </AssociationSet>
+          <AssociationSet Name="ESCRITAPOR" Association="Self.ESCRITAPOR">
+            <End Role="PERIODISTA" EntitySet="PERIODISTA" />
+            <End Role="NOTICIA" EntitySet="NOTICIA" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ObligatorioModelStoreContainer" CdmEntityContainer="ObligatorioEntities">
+          <EntitySetMapping Name="EMPLEADO">
+            <EntityTypeMapping TypeName="ObligatorioModel.EMPLEADO">
+              <MappingFragment StoreEntitySet="EMPLEADO">
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="Contrasenia" ColumnName="Contrasenia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="ObligatorioModel.EMPLEADO">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="ObligatorioModel.Store.AltaEmpleado" >
+                  <ScalarProperty Name="Contrasenia" ParameterName="pass" />
+                  <ScalarProperty Name="Usuario" ParameterName="user" />
+                </InsertFunction>
+              </ModificationFunctionMapping>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NOTICIA">
+            <EntityTypeMapping TypeName="ObligatorioModel.NOTICIA">
+              <MappingFragment StoreEntitySet="NOTICIA">
+                <ScalarProperty Name="CodigoNoticia" ColumnName="CodigoNoticia" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Cuerpo" ColumnName="Cuerpo" />
+                <ScalarProperty Name="Importancia" ColumnName="Importancia" />
+                <ScalarProperty Name="CodigoSeccion" ColumnName="CodigoSeccion" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PERIODISTA">
+            <EntityTypeMapping TypeName="ObligatorioModel.PERIODISTA">
+              <MappingFragment StoreEntitySet="PERIODISTA">
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Mail" ColumnName="Mail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="ObligatorioModel.PERIODISTA">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="ObligatorioModel.Store.AltaPeriodista" >
+                  <ScalarProperty Name="Mail" ParameterName="mail" />
+                  <ScalarProperty Name="Nombre" ParameterName="nom" />
+                  <ScalarProperty Name="Cedula" ParameterName="ced" />
+                </InsertFunction>
+                <UpdateFunction FunctionName="ObligatorioModel.Store.EditoPeriodista" >
+                  <ScalarProperty Name="Mail" ParameterName="mail" Version="Current" />
+                  <ScalarProperty Name="Nombre" ParameterName="nom" Version="Current" />
+                  <ScalarProperty Name="Cedula" ParameterName="ced" Version="Current" />
+                </UpdateFunction>
+              </ModificationFunctionMapping>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SECCION">
+            <EntityTypeMapping TypeName="ObligatorioModel.SECCION">
+              <MappingFragment StoreEntitySet="SECCION">
+                <ScalarProperty Name="CodigoSeccion" ColumnName="CodigoSeccion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="ObligatorioModel.SECCION">
+              <ModificationFunctionMapping>
+                <UpdateFunction FunctionName="ObligatorioModel.Store.ModificoSeccion" >
+                  <ScalarProperty Name="Nombre" ParameterName="nombre" Version="Current" />
+                  <ScalarProperty Name="CodigoSeccion" ParameterName="code" Version="Current" />
+                </UpdateFunction>
+                <InsertFunction FunctionName="ObligatorioModel.Store.AltaSeccion" >
+                  <ScalarProperty Name="Nombre" ParameterName="nombre" />
+                  <ScalarProperty Name="CodigoSeccion" ParameterName="code" />
+                </InsertFunction>
+              </ModificationFunctionMapping>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="ESCRITAPOR" TypeName="ObligatorioModel.ESCRITAPOR" StoreEntitySet="ESCRITAPOR">
+            <EndProperty Name="PERIODISTA">
+              <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+            </EndProperty>
+            <EndProperty Name="NOTICIA">
+              <ScalarProperty Name="CodigoNoticia" ColumnName="CodigoNoticia" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram DiagramId="d80b232b42f245a782673102eae6699b" Name="Diagram1">
+        <EntityTypeShape EntityType="ObligatorioModel.EMPLEADO" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ObligatorioModel.NOTICIA" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="ObligatorioModel.PERIODISTA" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ObligatorioModel.SECCION" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
+        <AssociationConnector Association="ObligatorioModel.FK__NOTICIA__Usuario__36B12243" ManuallyRouted="false" />
+        <AssociationConnector Association="ObligatorioModel.FK__NOTICIA__CodigoS__35BCFE0A" ManuallyRouted="false" />
+        <AssociationConnector Association="ObligatorioModel.ESCRITAPOR" ManuallyRouted="false" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

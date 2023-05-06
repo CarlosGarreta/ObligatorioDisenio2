@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ObligatorioModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="EMPLEADO">
+    <Key>
+      <PropertyRef Name="Usuario" />
+    </Key>
+    <Property Name="Usuario" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Contrasenia" Type="String" MaxLength="7" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="NOTICIA">
+    <Key>
+      <PropertyRef Name="CodigoNoticia" />
+    </Key>
+    <Property Name="CodigoNoticia" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Titulo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Cuerpo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Importancia" Type="Int32" Nullable="false" />
+    <Property Name="CodigoSeccion" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Usuario" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="EMPLEADO" Relationship="Self.FK__NOTICIA__Usuario__36B12243" FromRole="NOTICIA" ToRole="EMPLEADO" />
+    <NavigationProperty Name="SECCION" Relationship="Self.FK__NOTICIA__CodigoS__35BCFE0A" FromRole="NOTICIA" ToRole="SECCION" />
+    <NavigationProperty Name="PERIODISTA" Relationship="Self.ESCRITAPOR" FromRole="NOTICIA" ToRole="PERIODISTA" />
+  </EntityType>
+  <EntityType Name="PERIODISTA">
+    <Key>
+      <PropertyRef Name="Cedula" />
+    </Key>
+    <Property Name="Cedula" Type="Int32" Nullable="false" />
+    <Property Name="Nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SECCION">
+    <Key>
+      <PropertyRef Name="CodigoSeccion" />
+    </Key>
+    <Property Name="CodigoSeccion" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Nombre" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__NOTICIA__Usuario__36B12243">
+    <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="1" />
+    <End Role="NOTICIA" Type="Self.NOTICIA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EMPLEADO">
+        <PropertyRef Name="Usuario" />
+      </Principal>
+      <Dependent Role="NOTICIA">
+        <PropertyRef Name="Usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__NOTICIA__CodigoS__35BCFE0A">
+    <End Role="SECCION" Type="Self.SECCION" Multiplicity="1" />
+    <End Role="NOTICIA" Type="Self.NOTICIA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SECCION">
+        <PropertyRef Name="CodigoSeccion" />
+      </Principal>
+      <Dependent Role="NOTICIA">
+        <PropertyRef Name="CodigoSeccion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ESCRITAPOR">
+    <End Role="PERIODISTA" Type="Self.PERIODISTA" Multiplicity="*" />
+    <End Role="NOTICIA" Type="Self.NOTICIA" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="ObligatorioEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="EMPLEADO" EntityType="Self.EMPLEADO" />
+    <EntitySet Name="NOTICIA" EntityType="Self.NOTICIA" />
+    <EntitySet Name="PERIODISTA" EntityType="Self.PERIODISTA" />
+    <EntitySet Name="SECCION" EntityType="Self.SECCION" />
+    <AssociationSet Name="FK__NOTICIA__Usuario__36B12243" Association="Self.FK__NOTICIA__Usuario__36B12243">
+      <End Role="EMPLEADO" EntitySet="EMPLEADO" />
+      <End Role="NOTICIA" EntitySet="NOTICIA" />
+    </AssociationSet>
+    <AssociationSet Name="FK__NOTICIA__CodigoS__35BCFE0A" Association="Self.FK__NOTICIA__CodigoS__35BCFE0A">
+      <End Role="SECCION" EntitySet="SECCION" />
+      <End Role="NOTICIA" EntitySet="NOTICIA" />
+    </AssociationSet>
+    <AssociationSet Name="ESCRITAPOR" Association="Self.ESCRITAPOR">
+      <End Role="PERIODISTA" EntitySet="PERIODISTA" />
+      <End Role="NOTICIA" EntitySet="NOTICIA" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
